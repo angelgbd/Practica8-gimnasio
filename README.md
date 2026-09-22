@@ -1,3 +1,5 @@
+<img width="811" height="802" alt="image" src="https://github.com/user-attachments/assets/19eb858b-faa9-4a80-8d21-8ea32618a221" />
+
 # Gimnasio API — Código base (Semana 5)
 
 API REST en NestJS para el gimnasio: `Clases`, `Horarios`, `Miembros` e `Inscripciones`, cada
