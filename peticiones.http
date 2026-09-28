@@ -1,13 +1,13 @@
-### Practica 6 - Inscripciones al gimnasio (SOLUCION)
+### Gimnasio API - peticiones de demostracion
 ###
 ### COMO SE USA:
 ###   1. Extension "REST Client" (humao.rest-client) en VS Code.
-###   2. npm run start:dev
-###   3. Clic en "Send Request" arriba de cada peticion.
+###   2. Configurar DATABASE_URL, ejecutar migraciones y seed; luego npm run start:dev.
+###   3. Clic en "Send Request" arriba de cada peticion, en orden.
 ###
 ### OJO: el orden importa. El horario 1 tiene cupoMaximo = 2, asi que las
 ### peticiones 1, 2 y 3 hay que correrlas EN ORDEN para ver el 409.
-### Todo vive en memoria: si reinicias el servidor, vuelve a cero.
+### Los datos viven en MySQL. Usa una base desechable para repetir esta bateria.
 
 @host = http://localhost:3000
 
@@ -166,3 +166,32 @@ GET {{host}}/horarios/99
 
 ### 27. Horarios - eliminar  ->  200
 DELETE {{host}}/horarios/4
+
+
+### 28. Inscripcion con tipo incorrecto  ->  400 con errores de validacion
+POST {{host}}/inscripciones
+Content-Type: application/json
+
+{ "horarioId": "hola", "miembroId": 1 }
+
+
+### 29. Campo que no existe en el DTO  ->  400, propiedad rechazada
+POST {{host}}/clases
+Content-Type: application/json
+
+{ "nombre": "Temporal", "campoSorpresa": true }
+
+
+### 30. CORS desde el origen de desarrollo 4200
+GET {{host}}/clases
+Origin: http://localhost:4200
+
+
+### 31. Misma peticion CORS desde el origen de desarrollo 5173
+GET {{host}}/clases
+Origin: http://localhost:5173
+
+
+### 32. Un origen fuera de la allowlist no recibe ACAO
+GET {{host}}/clases
+Origin: http://example.com

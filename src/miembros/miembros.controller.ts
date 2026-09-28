@@ -8,12 +8,12 @@ import {
   Param,
   Patch,
   Post,
-} from '@nestjs/common';
-import { MiembrosService } from './miembros.service';
-import type { CrearMiembroDto } from './dto/crear-miembro.dto';
-import type { ActualizarMiembroDto } from './dto/actualizar-miembro.dto';
+} from "@nestjs/common";
+import { MiembrosService } from "./miembros.service";
+import { CrearMiembroDto } from "./dto/crear-miembro.dto";
+import type { ActualizarMiembroDto } from "./dto/actualizar-miembro.dto";
 
-@Controller('miembros')
+@Controller("miembros")
 export class MiembrosController {
   constructor(private readonly miembrosService: MiembrosService) {}
 
@@ -24,8 +24,8 @@ export class MiembrosController {
   }
 
   /** GET /miembros/2 */
-  @Get(':id')
-  async buscar(@Param('id') id: string) {
+  @Get(":id")
+  async buscar(@Param("id") id: string) {
     const miembro = await this.miembrosService.buscar(Number(id));
     if (!miembro) {
       throw new NotFoundException(`No existe el miembro ${id}`);
@@ -41,8 +41,8 @@ export class MiembrosController {
   }
 
   /** PATCH /miembros/2 */
-  @Patch(':id')
-  async actualizar(@Param('id') id: string, @Body() dto: ActualizarMiembroDto) {
+  @Patch(":id")
+  async actualizar(@Param("id") id: string, @Body() dto: ActualizarMiembroDto) {
     const miembro = await this.miembrosService.actualizar(Number(id), dto);
     if (!miembro) {
       throw new NotFoundException(`No existe el miembro ${id}`);
@@ -51,8 +51,8 @@ export class MiembrosController {
   }
 
   /** DELETE /miembros/2 */
-  @Delete(':id')
-  async eliminar(@Param('id') id: string) {
+  @Delete(":id")
+  async eliminar(@Param("id") id: string) {
     const miembro = await this.miembrosService.eliminar(Number(id));
     if (!miembro) {
       throw new NotFoundException(`No existe el miembro ${id}`);

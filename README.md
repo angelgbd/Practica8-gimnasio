@@ -4,19 +4,26 @@
 
 API REST en NestJS para el gimnasio: `Clases`, `Horarios`, `Miembros` e `Inscripciones`, cada
 módulo con dominio, DTOs e infraestructura separados (patrón repositorio + inyección por token).
-Los datos viven en memoria — ningún repositorio se conecta todavía a una base de datos real.
+Los repositorios usan Prisma ORM 7 con el adaptador MariaDB para guardar los datos en MySQL.
 
 Este proyecto es el punto de partida de la Práctica 8 (Prisma) y la Práctica 9 (Blindar la API).
 
 ## Cómo correrlo
 
+1. Copia `.env.example` a `.env` y configura `DATABASE_URL` para una base MySQL/MariaDB.
+2. Instala dependencias, genera Prisma Client y prepara la base:
+
 ```bash
 npm install
+npx prisma generate
+npx prisma migrate deploy
+npx prisma db seed
 npm run start:dev
 ```
 
 El servidor levanta en `http://localhost:3000`. En `peticiones.http` está la batería completa de
-pruebas (requiere la extensión "REST Client" de VS Code).
+peticiones (requiere la extensión "REST Client" de VS Code). Ejecútalas en orden sobre una base
+desechable: las filas creadas se conservan en MySQL entre reinicios.
 
 ## Estructura
 
@@ -30,4 +37,4 @@ src/
 ```
 
 Cada módulo sigue la misma forma: `dominio/` (entidades + interfaz del repositorio), `dto/`,
-`infra/` (repositorio en memoria) y el token de inyección en `<módulo>.tokens.ts`.
+`infra/` (repositorio Prisma) y el token de inyección en `<módulo>.tokens.ts`.

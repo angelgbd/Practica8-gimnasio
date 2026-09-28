@@ -63,7 +63,7 @@ model Inscripcion{
   horario         Horario @relation(fields: [horarioId], references: [id], onDelete: Cascade)
   miembro         Miembro @relation(fields: [miembroId], references: [id], onDelete: Cascade)
 
-  @@unique([horarioId, miembroId])
+  @@index([horarioId])
   @@index([miembroId])
   @@map("inscripciones")
 }

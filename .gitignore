@@ -4,3 +4,4 @@ coverage/
 .env
 
 /generated/prisma
+/src/generado/prisma/

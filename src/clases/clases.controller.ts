@@ -8,12 +8,12 @@ import {
   Param,
   Patch,
   Post,
-} from '@nestjs/common';
-import { ClasesService } from './clases.service';
-import type { CrearClaseDto } from './dto/crear-clase.dto';
-import type { ActualizarClaseDto } from './dto/actualizar-clase.dto';
+} from "@nestjs/common";
+import { ClasesService } from "./clases.service";
+import { CrearClaseDto } from "./dto/crear-clase.dto";
+import type { ActualizarClaseDto } from "./dto/actualizar-clase.dto";
 
-@Controller('clases')
+@Controller("clases")
 export class ClasesController {
   constructor(private readonly clasesService: ClasesService) {}
 
@@ -24,8 +24,8 @@ export class ClasesController {
   }
 
   /** GET /clases/2 */
-  @Get(':id')
-  async buscar(@Param('id') id: string) {
+  @Get(":id")
+  async buscar(@Param("id") id: string) {
     const clase = await this.clasesService.buscar(Number(id));
     if (!clase) {
       throw new NotFoundException(`No existe la clase ${id}`);
@@ -41,8 +41,8 @@ export class ClasesController {
   }
 
   /** PATCH /clases/2 */
-  @Patch(':id')
-  async actualizar(@Param('id') id: string, @Body() dto: ActualizarClaseDto) {
+  @Patch(":id")
+  async actualizar(@Param("id") id: string, @Body() dto: ActualizarClaseDto) {
     const clase = await this.clasesService.actualizar(Number(id), dto);
     if (!clase) {
       throw new NotFoundException(`No existe la clase ${id}`);
@@ -51,8 +51,8 @@ export class ClasesController {
   }
 
   /** DELETE /clases/2 */
-  @Delete(':id')
-  async eliminar(@Param('id') id: string) {
+  @Delete(":id")
+  async eliminar(@Param("id") id: string) {
     const clase = await this.clasesService.eliminar(Number(id));
     if (!clase) {
       throw new NotFoundException(`No existe la clase ${id}`);
