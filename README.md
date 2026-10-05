@@ -34,10 +34,9 @@ Ejecuta primero los tres logins nombrados para que las solicitudes protegidas pu
 tokens; después corre los ejemplos en orden sobre una base desechable.
 
 Las consultas GET de clases y horarios, el inicio de la API y las rutas de login/registro son públicas.
-Las demás rutas requieren JWT. Los miembros solo pueden crear inscripciones para sí mismos; cancelar
-una inscripción requiere el rol entrenador o admin. Como material didáctico, el registro acepta `rol`
-y `miembroId` desde el cuerpo: eso permite autoasignar el rol admin, así que no se debe usar este
-comportamiento en producción.
+Las demás rutas requieren JWT. Como material didáctico, el registro acepta `rol` y `miembroId` desde
+el cuerpo: eso permite autoasignar el rol admin, así que no se debe usar este comportamiento en
+producción.
 
 ## Estructura
 
@@ -119,3 +118,8 @@ tiene permiso para esa acción; por ejemplo, un miembro intenta inscribir a otro
 
 AuthService depende del contrato `UsuarioRepository`, no de la implementación concreta. El módulo
 de autenticación cambió el proveedor enlazado al token de inyección para usar `UsuarioPrismaRepository`.
+
+por qué es importante tomar al usuario de los claims del token y no de un parámetro de la URL o del cuerpo? Da un ejemplo concreto de qué pasaría si la API confiara en algo como GET /miembros/3/inscripciones o en el miembroId del cuerpo sin compararlo contra el token. Explica qué claim se usa y por qué el cliente no puede falsificarlo
+
+Es importante porque la API debe identificar al usuario con datos autenticados, no con datos que el cliente puede cambiar. Por ejemplo, Karla podría pedir GET /miembros/3/inscripciones o enviar "miembroId": 3 para ver o crear inscripciones como si fuera otro miembro.
+La API usa los claims firmados del token, en particular miembroId, y los compara con el solicitado. El cliente no puede cambiarlos sin invalidar la firma JWT.
