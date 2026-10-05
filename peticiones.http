@@ -3,7 +3,8 @@
 ### COMO SE USA:
 ###   1. Extension "REST Client" (humao.rest-client) en VS Code.
 ###   2. Configurar DATABASE_URL, ejecutar migraciones y seed; luego npm run start:dev.
-###   3. Clic en "Send Request" arriba de cada peticion, en orden.
+###   3. Ejecuta primero los tres logins con nombre; luego manda cada request en orden.
+### Las respuestas exitosas tienen forma { data, meta }.
 ###
 ### OJO: el orden importa. El horario 1 tiene cupoMaximo = 2, asi que las
 ### peticiones 1, 2 y 3 hay que correrlas EN ORDEN para ver el 409.
@@ -11,8 +12,34 @@
 
 @host = http://localhost:3000
 
+### Ejecuta primero estos logins; las peticiones protegidas usan sus tokens.
+# @name loginKarla
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{ "correo": "karla@itson.mx", "password": "gimnasio2026" }
+
+###
+# @name loginEntrenador
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{ "correo": "ana@itson.mx", "password": "gimnasio2026" }
+
+###
+# @name loginAdmin
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{ "correo": "admin@itson.mx", "password": "gimnasio2026" }
+
+### /auth/yo devuelve el payload del usuario autenticado
+GET {{host}}/auth/yo
+Authorization: Bearer {{loginKarla.response.body.$.data.access_token}}
+
 ### 1. Primera inscripcion  ->  201 + header Location
 POST {{host}}/inscripciones
+Authorization: Bearer {{loginEntrenador.response.body.$.data.access_token}}
 Content-Type: application/json
 
 { "horarioId": 1, "miembroId": 1 }
@@ -20,6 +47,7 @@ Content-Type: application/json
 
 ### 2. Segunda inscripcion, se llena el cupo  ->  201
 POST {{host}}/inscripciones
+Authorization: Bearer {{loginEntrenador.response.body.$.data.access_token}}
 Content-Type: application/json
 
 { "horarioId": 1, "miembroId": 2 }
@@ -27,6 +55,7 @@ Content-Type: application/json
 
 ### 3. REGLA 1 - tercera inscripcion  ->  409 cupo lleno
 POST {{host}}/inscripciones
+Authorization: Bearer {{loginEntrenador.response.body.$.data.access_token}}
 Content-Type: application/json
 
 { "horarioId": 1, "miembroId": 3 }
@@ -34,6 +63,7 @@ Content-Type: application/json
 
 ### 4. REGLA 2 - el miembro 1 otra vez  ->  409 duplicada
 POST {{host}}/inscripciones
+Authorization: Bearer {{loginEntrenador.response.body.$.data.access_token}}
 Content-Type: application/json
 
 { "horarioId": 1, "miembroId": 1 }
@@ -41,6 +71,7 @@ Content-Type: application/json
 
 ### 5. Un horario que no existe  ->  404
 POST {{host}}/inscripciones
+Authorization: Bearer {{loginEntrenador.response.body.$.data.access_token}}
 Content-Type: application/json
 
 { "horarioId": 99, "miembroId": 1 }
@@ -48,6 +79,7 @@ Content-Type: application/json
 
 ### 6. Un miembro que no existe  ->  404
 POST {{host}}/inscripciones
+Authorization: Bearer {{loginEntrenador.response.body.$.data.access_token}}
 Content-Type: application/json
 
 { "horarioId": 3, "miembroId": 99 }
@@ -55,6 +87,7 @@ Content-Type: application/json
 
 ### 7. Cuerpo mal formado  ->  400, NO 409
 POST {{host}}/inscripciones
+Authorization: Bearer {{loginEntrenador.response.body.$.data.access_token}}
 Content-Type: application/json
 
 { "horarioId": "hola" }
@@ -62,16 +95,19 @@ Content-Type: application/json
 
 ### 8. Listar todas  ->  200
 GET {{host}}/inscripciones
+Authorization: Bearer {{loginEntrenador.response.body.$.data.access_token}}
 
 
 ### 9. Cancelar la primera  ->  200 con estado "cancelada"
 DELETE {{host}}/inscripciones/1
+Authorization: Bearer {{loginEntrenador.response.body.$.data.access_token}}
 
 
 ### 10. EL REMATE DE LA CLASE  ->  201
 ###     Es la MISMA peticion de la #3, que dio 409.
 ###     Ahora da 201 porque la cancelacion libero el lugar.
 POST {{host}}/inscripciones
+Authorization: Bearer {{loginEntrenador.response.body.$.data.access_token}}
 Content-Type: application/json
 
 { "horarioId": 1, "miembroId": 3 }
@@ -88,6 +124,7 @@ GET {{host}}/clases
 
 ### 12. Clases - crear  ->  201
 POST {{host}}/clases
+Authorization: Bearer {{loginAdmin.response.body.$.data.access_token}}
 Content-Type: application/json
 
 { "nombre": "Funcional" }
@@ -99,6 +136,7 @@ GET {{host}}/clases/3
 
 ### 14. Clases - actualizar el nombre (PATCH)  ->  200
 PATCH {{host}}/clases/3
+Authorization: Bearer {{loginAdmin.response.body.$.data.access_token}}
 Content-Type: application/json
 
 { "nombre": "Funcional Avanzado" }
@@ -110,14 +148,17 @@ GET {{host}}/clases/99
 
 ### 16. Clases - eliminar  ->  200
 DELETE {{host}}/clases/3
+Authorization: Bearer {{loginAdmin.response.body.$.data.access_token}}
 
 
 ### 17. Miembros - listar (los tres del seed)  ->  200
 GET {{host}}/miembros
+Authorization: Bearer {{loginAdmin.response.body.$.data.access_token}}
 
 
 ### 18. Miembros - crear  ->  201
 POST {{host}}/miembros
+Authorization: Bearer {{loginAdmin.response.body.$.data.access_token}}
 Content-Type: application/json
 
 { "nombre": "Luis Prueba", "correo": "luis@itson.mx", "membresia": "basica" }
@@ -125,10 +166,12 @@ Content-Type: application/json
 
 ### 19. Miembros - buscar por id  ->  200
 GET {{host}}/miembros/4
+Authorization: Bearer {{loginAdmin.response.body.$.data.access_token}}
 
 
 ### 20. Miembros - dar de baja (PATCH activo:false)  ->  200
 PATCH {{host}}/miembros/4
+Authorization: Bearer {{loginAdmin.response.body.$.data.access_token}}
 Content-Type: application/json
 
 { "activo": false }
@@ -136,10 +179,12 @@ Content-Type: application/json
 
 ### 21. Miembros - un id que no existe  ->  404
 GET {{host}}/miembros/99
+Authorization: Bearer {{loginAdmin.response.body.$.data.access_token}}
 
 
 ### 22. Miembros - eliminar  ->  200
 DELETE {{host}}/miembros/4
+Authorization: Bearer {{loginAdmin.response.body.$.data.access_token}}
 
 
 ### 23. Horarios - listar (los tres del seed)  ->  200
@@ -148,6 +193,7 @@ GET {{host}}/horarios
 
 ### 24. Horarios - crear  ->  201
 POST {{host}}/horarios
+Authorization: Bearer {{loginAdmin.response.body.$.data.access_token}}
 Content-Type: application/json
 
 { "claseId": 2, "dia": "jueves", "horaInicio": "18:00", "cupoMaximo": 5, "entrenador": "Luis Fierro" }
@@ -155,6 +201,7 @@ Content-Type: application/json
 
 ### 25. Horarios - actualizar el cupo  ->  200
 PATCH {{host}}/horarios/4
+Authorization: Bearer {{loginAdmin.response.body.$.data.access_token}}
 Content-Type: application/json
 
 { "cupoMaximo": 6 }
@@ -166,10 +213,12 @@ GET {{host}}/horarios/99
 
 ### 27. Horarios - eliminar  ->  200
 DELETE {{host}}/horarios/4
+Authorization: Bearer {{loginAdmin.response.body.$.data.access_token}}
 
 
 ### 28. Inscripcion con tipo incorrecto  ->  400 con errores de validacion
 POST {{host}}/inscripciones
+Authorization: Bearer {{loginEntrenador.response.body.$.data.access_token}}
 Content-Type: application/json
 
 { "horarioId": "hola", "miembroId": 1 }
@@ -177,21 +226,44 @@ Content-Type: application/json
 
 ### 29. Campo que no existe en el DTO  ->  400, propiedad rechazada
 POST {{host}}/clases
+Authorization: Bearer {{loginAdmin.response.body.$.data.access_token}}
 Content-Type: application/json
 
 { "nombre": "Temporal", "campoSorpresa": true }
 
 
-### 30. CORS desde el origen de desarrollo 4200
-GET {{host}}/clases
-Origin: http://localhost:4200
-
-
-### 31. Misma peticion CORS desde el origen de desarrollo 5173
+### 30. CORS desde el origen permitido de Vite 5173
 GET {{host}}/clases
 Origin: http://localhost:5173
 
 
-### 32. Un origen fuera de la allowlist no recibe ACAO
+### 31. Mismo endpoint desde el origen no permitido 4000 (sin ACAO)
 GET {{host}}/clases
-Origin: http://example.com
+Origin: http://localhost:4000
+
+
+### 32. El middleware conserva el ID que manda el cliente
+GET {{host}}/clases
+X-Request-Id: evidencia-request-123
+
+
+### 33. Karla se inscribe a sí misma -> 201
+# @name inscripcionKarlaPropia
+POST {{host}}/inscripciones
+Authorization: Bearer {{loginKarla.response.body.$.data.access_token}}
+Content-Type: application/json
+
+{ "horarioId": 2, "miembroId": 1 }
+
+
+### 34. Karla intenta inscribir a Sofía -> 403
+POST {{host}}/inscripciones
+Authorization: Bearer {{loginKarla.response.body.$.data.access_token}}
+Content-Type: application/json
+
+{ "horarioId": 2, "miembroId": 3 }
+
+
+### 35. Cancelar la inscripción propia de prueba
+DELETE {{host}}/inscripciones/{{inscripcionKarlaPropia.response.body.$.data.id}}
+Authorization: Bearer {{loginAdmin.response.body.$.data.access_token}}

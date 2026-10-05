@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1080" viewBox="0 0 1440 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Flujo de autenticación JWT en Gimnasio API</title>
+  <desc id="desc">El cliente inicia sesión; el servidor compara el hash con bcrypt, firma un JWT, y el guard valida su firma y expiración antes de permitir el acceso al controlador. Un token ausente o alterado recibe 401.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M1,1 L11,6 L1,11 z" fill="#52647a" />
+    </marker>
+    <marker id="redArrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M1,1 L11,6 L1,11 z" fill="#c2414b" />
+    </marker>
+    <style>
+      .title { font: 700 36px 'Segoe UI', Arial, sans-serif; fill: #15253a; }
+      .subtitle { font: 400 18px 'Segoe UI', Arial, sans-serif; fill: #52647a; }
+      .head { font: 700 19px 'Segoe UI', Arial, sans-serif; fill: #15253a; }
+      .body { font: 400 16px 'Segoe UI', Arial, sans-serif; fill: #30445c; }
+      .small { font: 400 14px 'Segoe UI', Arial, sans-serif; fill: #52647a; }
+      .code { font: 600 15px Consolas, 'Courier New', monospace; fill: #20344d; }
+      .box { fill: #ffffff; stroke: #91a5ba; stroke-width: 2; rx: 16; }
+      .blue { fill: #e8f1fb; stroke: #5690c6; stroke-width: 2; rx: 16; }
+      .green { fill: #e7f5ee; stroke: #42936c; stroke-width: 2; rx: 16; }
+      .gold { fill: #fff3d8; stroke: #c69234; stroke-width: 2; rx: 16; }
+      .red { fill: #fff0ef; stroke: #c2414b; stroke-width: 2; rx: 16; }
+      .line { fill: none; stroke: #52647a; stroke-width: 3; marker-end: url(#arrow); }
+      .errorLine { fill: none; stroke: #c2414b; stroke-width: 3; marker-end: url(#redArrow); }
+    </style>
+  </defs>
+
+  <rect width="1440" height="1080" fill="#f4f7fb" />
+  <text x="64" y="68" class="title">Flujo de autenticación JWT</text>
+  <text x="64" y="101" class="subtitle">Gimnasio API · JWT firmado: el contenido se puede leer, pero cualquier cambio rompe la firma.</text>
+
+  <text x="64" y="155" class="head">1 · Inicio de sesión y emisión del token</text>
+  <rect x="64" y="180" width="205" height="132" class="blue" />
+  <text x="166" y="218" text-anchor="middle" class="head">Cliente</text>
+  <text x="166" y="250" text-anchor="middle" class="code">correo + password</text>
+  <text x="166" y="278" text-anchor="middle" class="small">POST /auth/login</text>
+
+  <path d="M269 246 H314" class="line" />
+  <rect x="324" y="180" width="220" height="132" class="box" />
+  <text x="434" y="218" text-anchor="middle" class="head">AuthService</text>
+  <text x="434" y="249" text-anchor="middle" class="body">busca por correo</text>
+  <text x="434" y="278" text-anchor="middle" class="small">sin devolver el hash</text>
+
+  <path d="M544 246 H589" class="line" />
+  <rect x="599" y="180" width="220" height="132" class="gold" />
+  <text x="709" y="218" text-anchor="middle" class="head">bcrypt.compare</text>
+  <text x="709" y="249" text-anchor="middle" class="body">password vs.</text>
+  <text x="709" y="278" text-anchor="middle" class="code">passwordHash</text>
+
+  <path d="M819 246 H864" class="line" />
+  <rect x="874" y="180" width="230" height="132" class="green" />
+  <text x="989" y="218" text-anchor="middle" class="head">Firma del servidor</text>
+  <text x="989" y="249" text-anchor="middle" class="body">JWT + JWT_SECRET</text>
+  <text x="989" y="278" text-anchor="middle" class="small">vigencia: 1 hora</text>
+
+  <path d="M1104 246 H1149" class="line" />
+  <rect x="1159" y="180" width="217" height="132" class="blue" />
+  <text x="1267" y="218" text-anchor="middle" class="head">Respuesta</text>
+  <text x="1267" y="249" text-anchor="middle" class="code">data.access_token</text>
+  <text x="1267" y="278" text-anchor="middle" class="small">envuelta en { data, meta }</text>
+
+  <rect x="324" y="338" width="780" height="108" class="box" />
+  <text x="349" y="373" class="head">Partes del JWT</text>
+  <rect x="349" y="389" width="190" height="38" fill="#e8f1fb" rx="8" />
+  <text x="444" y="414" text-anchor="middle" class="code">header</text>
+  <text x="557" y="414" class="head">.</text>
+  <rect x="577" y="389" width="260" height="38" fill="#fff3d8" rx="8" />
+  <text x="707" y="414" text-anchor="middle" class="code">payload legible</text>
+  <text x="855" y="414" class="head">.</text>
+  <rect x="875" y="389" width="204" height="38" fill="#e7f5ee" rx="8" />
+  <text x="977" y="414" text-anchor="middle" class="code">firma</text>
+  <text x="1120" y="402" class="small">No es cifrado.</text>
+  <text x="1120" y="423" class="small">No incluir secretos.</text>
+
+  <path d="M1267 312 V487 H166 V518" class="line" />
+  <text x="642" y="478" class="small">El cliente conserva el token para las siguientes solicitudes.</text>
+
+  <text x="64" y="507" class="head">2 · Solicitud protegida</text>
+  <rect x="64" y="530" width="205" height="128" class="blue" />
+  <text x="166" y="568" text-anchor="middle" class="head">Cliente</text>
+  <text x="166" y="600" text-anchor="middle" class="code">Authorization:</text>
+  <text x="166" y="626" text-anchor="middle" class="code">Bearer &lt;token&gt;</text>
+
+  <path d="M269 594 H314" class="line" />
+  <rect x="324" y="530" width="250" height="128" class="gold" />
+  <text x="449" y="568" text-anchor="middle" class="head">JwtAuthGuard</text>
+  <text x="449" y="600" text-anchor="middle" class="body">Passport / JwtStrategy</text>
+  <text x="449" y="628" text-anchor="middle" class="small">global, seguro por omisión</text>
+
+  <path d="M574 594 H619" class="line" />
+  <rect x="629" y="530" width="260" height="128" class="green" />
+  <text x="759" y="568" text-anchor="middle" class="head">Verifica</text>
+  <text x="759" y="600" text-anchor="middle" class="body">firma y expiración</text>
+  <text x="759" y="628" text-anchor="middle" class="small">payload validado → req.user</text>
+
+  <path d="M889 594 H934" class="line" />
+  <rect x="944" y="530" width="220" height="128" class="box" />
+  <text x="1054" y="568" text-anchor="middle" class="head">Controlador</text>
+  <text x="1054" y="600" text-anchor="middle" class="code">@UsuarioActual()</text>
+  <text x="1054" y="628" text-anchor="middle" class="small">lee identidad y rol</text>
+
+  <path d="M1164 594 H1209" class="line" />
+  <rect x="1219" y="530" width="157" height="128" class="blue" />
+  <text x="1297" y="568" text-anchor="middle" class="head">Ruta</text>
+  <text x="1297" y="600" text-anchor="middle" class="body">continúa</text>
+  <text x="1297" y="628" text-anchor="middle" class="small">autorizada</text>
+
+  <text x="64" y="711" class="head">3 · Fallos de autenticación</text>
+  <rect x="64" y="738" width="330" height="115" class="red" />
+  <text x="229" y="777" text-anchor="middle" class="head">Sin token</text>
+  <text x="229" y="810" text-anchor="middle" class="body">El guard rechaza la solicitud</text>
+  <text x="229" y="836" text-anchor="middle" class="code">401 Unauthorized</text>
+
+  <rect x="456" y="738" width="450" height="115" class="red" />
+  <text x="681" y="777" text-anchor="middle" class="head">Payload alterado (p. ej. rol: admin)</text>
+  <text x="681" y="810" text-anchor="middle" class="body">La firma ya no coincide; Passport rechaza el JWT</text>
+  <text x="681" y="836" text-anchor="middle" class="code">401 Unauthorized</text>
+
+  <rect x="968" y="738" width="408" height="115" class="box" />
+  <text x="1172" y="777" text-anchor="middle" class="head">Firma ≠ cifrado</text>
+  <text x="1172" y="810" text-anchor="middle" class="body">Cualquiera puede leer el payload.</text>
+  <text x="1172" y="836" text-anchor="middle" class="body">Solo quien posee el secreto puede firmarlo.</text>
+
+  <path d="M166 658 V720" class="errorLine" />
+  <path d="M759 658 V700 H681 V720" class="errorLine" />
+
+  <text x="64" y="925" class="head">Autorización de negocio</text>
+  <rect x="64" y="947" width="1312" height="76" fill="#ffffff" stroke="#91a5ba" stroke-width="2" rx="14" />
+  <text x="720" y="978" text-anchor="middle" class="body">Miembro: solo puede inscribirse a su propio miembroId · Entrenador/admin: pueden inscribir a otros.</text>
+  <text x="720" y="1006" text-anchor="middle" class="small">Credenciales inválidas y token ausente/alterado producen 401; autenticado sin permiso produce 403.</text>
+</svg>

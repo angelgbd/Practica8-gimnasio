@@ -4,8 +4,8 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generado/prisma"
+  provider     = "prisma-client"
+  output       = "../src/generado/prisma"
   moduleformat = "cjs"
 }
 
@@ -13,57 +13,68 @@ datasource db {
   provider = "mysql"
 }
 
-model Clase{
-  id            Int @id @default(autoincrement())
-  nombre        String @db.VarChar(80)
-  descripcion   String @db.VarChar(255)
-  horarios      Horario[]
+model Clase {
+  id          Int       @id @default(autoincrement())
+  nombre      String    @db.VarChar(80)
+  descripcion String    @db.VarChar(255)
+  horarios    Horario[]
 
   @@map("clases")
 }
 
-model Horario{
-  id              Int @id @default(autoincrement())
-  claseId         Int
-  dia             String @db.VarChar(20)
-  horaInicio      String @db.VarChar(5)
-  cupoMaximo      Int
-  entrenador      String @db.VarChar(80)
-  inscripciones   Inscripcion[]
+model Horario {
+  id            Int           @id @default(autoincrement())
+  claseId       Int
+  dia           String        @db.VarChar(20)
+  horaInicio    String        @db.VarChar(5)
+  cupoMaximo    Int
+  entrenador    String        @db.VarChar(80)
+  inscripciones Inscripcion[]
 
   clase Clase @relation(fields: [claseId], references: [id], onDelete: Cascade)
-  
+
   @@index([claseId])
   @@map("horarios")
 }
 
 model Miembro {
-  id              Int @id @default(autoincrement())
-  nombre          String @db.VarChar(100)
-  correo          String @unique @db.VarChar(50)
-  membresia       String @db.VarChar(20)
-  activo          Boolean @default(true)
-  inscripciones   Inscripcion[]
+  id            Int           @id @default(autoincrement())
+  nombre        String        @db.VarChar(100)
+  correo        String        @unique @db.VarChar(50)
+  membresia     String        @db.VarChar(20)
+  activo        Boolean       @default(true)
+  inscripciones Inscripcion[]
 
-  @@map("miembros") 
+  @@map("miembros")
 }
 
-enum EstadoInscripcion{
+enum EstadoInscripcion {
   confirmada
   cancelada
 }
 
-model Inscripcion{
-  id              Int @id @default(autoincrement())
-  horarioId       Int
-  miembroId       Int
-  estado          EstadoInscripcion @default(confirmada)
-  creadoEn        DateTime @default(now())
+model Inscripcion {
+  id        Int               @id @default(autoincrement())
+  horarioId Int
+  miembroId Int
+  estado    EstadoInscripcion @default(confirmada)
+  creadoEn  DateTime          @default(now())
 
-  horario         Horario @relation(fields: [horarioId], references: [id], onDelete: Cascade)
-  miembro         Miembro @relation(fields: [miembroId], references: [id], onDelete: Cascade)
+  horario Horario @relation(fields: [horarioId], references: [id], onDelete: Cascade)
+  miembro Miembro @relation(fields: [miembroId], references: [id], onDelete: Cascade)
 
   @@index([horarioId])
   @@index([miembroId])
   @@map("inscripciones")
+}
+
+model Usuario {
+  id           Int      @id @default(autoincrement())
+  correo       String   @unique @db.VarChar(160)
+  passwordHash String   @db.VarChar(72)
+  rol          String   @default("miembro") @db.VarChar(20)
+  miembroId    Int?
+  creadoEn     DateTime @default(now())
+
+  @@map("usuarios")
 }

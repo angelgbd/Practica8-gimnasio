@@ -1,10 +1,13 @@
 import "dotenv/config";
+import * as bcrypt from "bcryptjs";
 import { PrismaClient } from "../src/generado/prisma/client";
 import { createPrismaAdapter } from "../src/prisma/prisma.adapter";
 
 const prisma = new PrismaClient({ adapter: createPrismaAdapter() });
 
 async function main(): Promise<void> {
+  await prisma.usuario.deleteMany();
+
   await prisma.clase.upsert({
     where: { id: 1 },
     create: { id: 1, nombre: "Yoga", descripcion: "" },
@@ -82,6 +85,28 @@ async function main(): Promise<void> {
       update: datos,
     });
   }
+
+  const passwordHash = await bcrypt.hash("gimnasio2026", 10);
+  await prisma.usuario.createMany({
+    data: [
+      {
+        correo: "karla@itson.mx",
+        passwordHash,
+        rol: "miembro",
+        miembroId: 1,
+      },
+      {
+        correo: "ana@itson.mx",
+        passwordHash,
+        rol: "entrenador",
+      },
+      {
+        correo: "admin@itson.mx",
+        passwordHash,
+        rol: "admin",
+      },
+    ],
+  });
 }
 
 main()
