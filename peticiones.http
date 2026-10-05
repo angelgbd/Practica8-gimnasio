@@ -264,6 +264,11 @@ Content-Type: application/json
 { "horarioId": 2, "miembroId": 3 }
 
 
-### 35. Cancelar la inscripción propia de prueba
+### 35. Karla intenta cancelar la inscripción -> 403
+DELETE {{host}}/inscripciones/{{inscripcionKarlaPropia.response.body.$.data.id}}
+Authorization: Bearer {{loginKarla.response.body.$.data.access_token}}
+
+
+### 36. El administrador cancela la inscripción propia de prueba
 DELETE {{host}}/inscripciones/{{inscripcionKarlaPropia.response.body.$.data.id}}
 Authorization: Bearer {{loginAdmin.response.body.$.data.access_token}}

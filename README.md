@@ -34,9 +34,10 @@ Ejecuta primero los tres logins nombrados para que las solicitudes protegidas pu
 tokens; después corre los ejemplos en orden sobre una base desechable.
 
 Las consultas GET de clases y horarios, el inicio de la API y las rutas de login/registro son públicas.
-Las demás rutas requieren JWT. Como material didáctico, el registro acepta `rol` y `miembroId` desde
-el cuerpo: eso permite autoasignar el rol admin, así que no se debe usar este comportamiento en
-producción.
+Las demás rutas requieren JWT. Los miembros solo pueden crear inscripciones para sí mismos; cancelar
+una inscripción requiere el rol entrenador o admin. Como material didáctico, el registro acepta `rol`
+y `miembroId` desde el cuerpo: eso permite autoasignar el rol admin, así que no se debe usar este
+comportamiento en producción.
 
 ## Estructura
 

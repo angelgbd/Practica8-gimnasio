@@ -9,12 +9,15 @@ import {
   Param,
   Post,
   Res,
+  UseGuards,
 } from "@nestjs/common";
 import type { Response } from "express";
 import { InscripcionesService } from "./inscripciones.service";
 import { CrearInscripcionDto } from "./dto/crear-inscripcion.dto";
 import { aInscripcionDto } from "./dto/inscripcion-respuesta.dto";
 import { UsuarioActual } from "../auth/decoradores/usuario-actual.decorator";
+import { Roles } from "../auth/decoradores/roles.decorator";
+import { RolesGuard } from "../auth/guards/roles.guard";
 import { Rol } from "../auth/dominio/usuario";
 import type { PayloadJwt } from "../auth/dominio/usuario";
 
@@ -53,6 +56,8 @@ export class InscripcionesController {
   }
 
   @Delete(":id")
+  @Roles(Rol.entrenador, Rol.admin)
+  @UseGuards(RolesGuard)
   async cancelar(@Param("id") id: string) {
     const cancelada = await this.servicio.cancelar(Number(id));
     if (!cancelada) {
