@@ -7,5 +7,6 @@ export interface Horario {
   dia: string;
   horaInicio: string;
   cupoMaximo: number;
+  lugaresDisponibles: number;
   entrenador: string;
 }

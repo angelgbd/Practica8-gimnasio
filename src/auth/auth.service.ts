@@ -33,8 +33,8 @@ export class AuthService {
     const usuario = await this.usuarios.guardar({
       correo,
       passwordHash: await bcrypt.hash(dto.password, VUELTAS_BCRYPT),
-      rol: dto.rol ?? Rol.miembro,
-      miembroId: dto.miembroId ?? null,
+      rol: Rol.miembro,
+      miembroId: null,
     });
     return this.firmar(usuario);
   }

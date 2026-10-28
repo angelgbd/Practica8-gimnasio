@@ -1,11 +1,7 @@
 import {
   IsEmail,
-  IsEnum,
-  IsInt,
-  IsOptional,
   MinLength,
 } from "class-validator";
-import { Rol } from "../dominio/usuario";
 
 export class RegistroDto {
   @IsEmail({}, { message: "el correo no tiene un formato valido" })
@@ -16,13 +12,6 @@ export class RegistroDto {
   })
   password!: string;
 
-  @IsOptional()
-  @IsEnum(Rol, { message: "rol debe ser miembro, entrenador o admin" })
-  rol?: Rol;
-
-  @IsOptional()
-  @IsInt()
-  miembroId?: number;
 }
 
 export class LoginDto {

@@ -1,5 +1,8 @@
 ### Gimnasio API - peticiones de demostracion
 ###
+### Archivo historico de las practicas anteriores. Para el contrato actual de inscripciones usa
+### practica-17/peticiones.http: la API toma miembroId del JWT y solo permite inscribir a miembros.
+###
 ### COMO SE USA:
 ###   1. Extension "REST Client" (humao.rest-client) en VS Code.
 ###   2. Configurar DATABASE_URL, ejecutar migraciones y seed; luego npm run start:dev.

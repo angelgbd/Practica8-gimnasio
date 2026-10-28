@@ -29,15 +29,15 @@ Las cuentas de prueba son `karla@itson.mx`, `ana@itson.mx` y `admin@itson.mx`; l
 `gimnasio2026`. Inicia sesión en `POST /auth/login` y manda el valor `data.access_token` como
 `Authorization: Bearer <token>`. El seed elimina y recrea solo las filas de usuarios.
 
-En `peticiones.http` está la batería de peticiones (requiere la extensión REST Client de VS Code).
-Ejecuta primero los tres logins nombrados para que las solicitudes protegidas puedan reutilizar sus
-tokens; después corre los ejemplos en orden sobre una base desechable.
+La batería actual de peticiones REST Client está en `practica-17/peticiones.http`. Ejecuta primero los
+logins nombrados para que las solicitudes protegidas puedan reutilizar sus tokens; usa una base
+desechable al probar inscripciones.
 
 Las consultas GET de clases y horarios, el inicio de la API y las rutas de login/registro son públicas.
-Las demás rutas requieren JWT. Los miembros solo pueden crear inscripciones para sí mismos; cancelar
-una inscripción requiere el rol entrenador o admin. Como material didáctico, el registro acepta `rol`
-y `miembroId` desde el cuerpo: eso permite autoasignar el rol admin, así que no se debe usar este
-comportamiento en producción.
+Las demás rutas requieren JWT. El registro público solo crea cuentas de miembro sin vínculo a un
+registro de miembro; los roles privilegiados y la relación con un miembro no se pueden escoger desde
+el cuerpo de registro. Los miembros solo pueden inscribirse con el `miembroId` de su token y consultar
+sus propias inscripciones. Cancelar inscripciones y consultar todas requiere el rol entrenador o admin.
 
 ## Estructura
 
@@ -77,7 +77,7 @@ metadatos que `class-validator` puede inspeccionar.
 
 **¿Qué código de estado responde la validación y qué trae en el cuerpo?**
 
-Los dos casos responden 400. El cuerpo mal formado produjo `{"message":["horarioId must be an integer number","miembroId must be an integer number"],"error":"Bad Request","statusCode":400}`. La propiedad extra produjo `{"message":["property campoSorpresa should not exist"],"error":"Bad Request","statusCode":400}`. Para rechazar campos desconocidos, `forbidNonWhitelisted` debe acompañarse de `whitelist`.
+Los dos casos responden 400. El cuerpo mal formado produjo `{"message":["horarioId must be an integer number"],"error":"Bad Request","statusCode":400}`. La propiedad extra produjo `{"message":["property campoSorpresa should not exist"],"error":"Bad Request","statusCode":400}`. Para rechazar campos desconocidos, `forbidNonWhitelisted` debe acompañarse de `whitelist`.
 
 **¿Cuántas líneas quedó más corto el controlador de Inscripciones?**
 

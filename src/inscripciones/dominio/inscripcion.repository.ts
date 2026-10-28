@@ -4,6 +4,7 @@ import { Horario, Inscripcion, Miembro, NuevaInscripcion } from './entidades';
 // en memoria o MySQL: ese es el punto de la Practica 8 (Prisma).
 export interface InscripcionRepository {
   listar(): Promise<Inscripcion[]>;
+  listarPorMiembro(miembroId: number): Promise<Inscripcion[]>;
   buscarPorId(id: number): Promise<Inscripcion | null>;
   buscarPorHorario(horarioId: number): Promise<Inscripcion[]>;
   buscarHorario(horarioId: number): Promise<Horario | null>;

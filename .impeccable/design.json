@@ -1,0 +1,366 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-28T23:02:22Z",
+  "title": "Design System: Gimnasio Práctica 17",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Lime Signal",
+        "canonical": "#d5fa70",
+        "tonalRamp": [
+          "oklch(15% 0.169 122.3)",
+          "oklch(25% 0.169 122.3)",
+          "oklch(35% 0.169 122.3)",
+          "oklch(45% 0.169 122.3)",
+          "oklch(55% 0.169 122.3)",
+          "oklch(65% 0.169 122.3)",
+          "oklch(75% 0.169 122.3)",
+          "oklch(95% 0.169 122.3)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Forest Ink",
+        "canonical": "#17241d",
+        "tonalRamp": [
+          "oklch(15% 0.022 160.6)",
+          "oklch(25% 0.022 160.6)",
+          "oklch(35% 0.022 160.6)",
+          "oklch(45% 0.022 160.6)",
+          "oklch(55% 0.022 160.6)",
+          "oklch(65% 0.022 160.6)",
+          "oklch(75% 0.022 160.6)",
+          "oklch(95% 0.022 160.6)"
+        ]
+      },
+      "accent-ink": {
+        "role": "neutral",
+        "displayName": "Ink on Lime",
+        "canonical": "#192b12",
+        "tonalRamp": [
+          "oklch(15% 0.050 137.5)",
+          "oklch(25% 0.050 137.5)",
+          "oklch(35% 0.050 137.5)",
+          "oklch(45% 0.050 137.5)",
+          "oklch(55% 0.050 137.5)",
+          "oklch(65% 0.050 137.5)",
+          "oklch(75% 0.050 137.5)",
+          "oklch(95% 0.050 137.5)"
+        ]
+      },
+      "neutral-bg": {
+        "role": "neutral",
+        "displayName": "Soft Paper",
+        "canonical": "#f1f2eb",
+        "tonalRamp": [
+          "oklch(15% 0.009 113.2)",
+          "oklch(25% 0.009 113.2)",
+          "oklch(35% 0.009 113.2)",
+          "oklch(45% 0.009 113.2)",
+          "oklch(55% 0.009 113.2)",
+          "oklch(65% 0.009 113.2)",
+          "oklch(75% 0.009 113.2)",
+          "oklch(95% 0.009 113.2)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Warm Surface",
+        "canonical": "#fffefa",
+        "tonalRamp": [
+          "oklch(15% 0.005 95.1)",
+          "oklch(25% 0.005 95.1)",
+          "oklch(35% 0.005 95.1)",
+          "oklch(45% 0.005 95.1)",
+          "oklch(55% 0.005 95.1)",
+          "oklch(65% 0.005 95.1)",
+          "oklch(75% 0.005 95.1)",
+          "oklch(95% 0.005 95.1)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Sage",
+        "canonical": "#526057",
+        "tonalRamp": [
+          "oklch(15% 0.022 157.2)",
+          "oklch(25% 0.022 157.2)",
+          "oklch(35% 0.022 157.2)",
+          "oklch(45% 0.022 157.2)",
+          "oklch(55% 0.022 157.2)",
+          "oklch(65% 0.022 157.2)",
+          "oklch(75% 0.022 157.2)",
+          "oklch(95% 0.022 157.2)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Divider Sage",
+        "canonical": "#cbd2c7",
+        "tonalRamp": [
+          "oklch(15% 0.017 133.8)",
+          "oklch(25% 0.017 133.8)",
+          "oklch(35% 0.017 133.8)",
+          "oklch(45% 0.017 133.8)",
+          "oklch(55% 0.017 133.8)",
+          "oklch(65% 0.017 133.8)",
+          "oklch(75% 0.017 133.8)",
+          "oklch(95% 0.017 133.8)"
+        ]
+      },
+      "focus": {
+        "role": "semantic-focus",
+        "displayName": "Focus Green",
+        "canonical": "#397447",
+        "tonalRamp": [
+          "oklch(15% 0.094 149.7)",
+          "oklch(25% 0.094 149.7)",
+          "oklch(35% 0.094 149.7)",
+          "oklch(45% 0.094 149.7)",
+          "oklch(55% 0.094 149.7)",
+          "oklch(65% 0.094 149.7)",
+          "oklch(75% 0.094 149.7)",
+          "oklch(95% 0.094 149.7)"
+        ]
+      },
+      "danger": {
+        "role": "semantic-error",
+        "displayName": "Error Brick",
+        "canonical": "#8c282c",
+        "tonalRamp": [
+          "oklch(15% 0.135 22.7)",
+          "oklch(25% 0.135 22.7)",
+          "oklch(35% 0.135 22.7)",
+          "oklch(45% 0.135 22.7)",
+          "oklch(55% 0.135 22.7)",
+          "oklch(65% 0.135 22.7)",
+          "oklch(75% 0.135 22.7)",
+          "oklch(95% 0.135 22.7)"
+        ]
+      },
+      "danger-bg": {
+        "role": "semantic-error-surface",
+        "displayName": "Error Blush",
+        "canonical": "#fff0ed",
+        "tonalRamp": [
+          "oklch(15% 0.017 31.1)",
+          "oklch(25% 0.017 31.1)",
+          "oklch(35% 0.017 31.1)",
+          "oklch(45% 0.017 31.1)",
+          "oklch(55% 0.017 31.1)",
+          "oklch(65% 0.017 31.1)",
+          "oklch(75% 0.017 31.1)",
+          "oklch(95% 0.017 31.1)"
+        ]
+      },
+      "success": {
+        "role": "semantic-success",
+        "displayName": "Success Green",
+        "canonical": "#284b26",
+        "tonalRamp": [
+          "oklch(15% 0.073 142.8)",
+          "oklch(25% 0.073 142.8)",
+          "oklch(35% 0.073 142.8)",
+          "oklch(45% 0.073 142.8)",
+          "oklch(55% 0.073 142.8)",
+          "oklch(65% 0.073 142.8)",
+          "oklch(75% 0.073 142.8)",
+          "oklch(95% 0.073 142.8)"
+        ]
+      },
+      "success-bg": {
+        "role": "semantic-success-surface",
+        "displayName": "Success Wash",
+        "canonical": "#edf7e6",
+        "tonalRamp": [
+          "oklch(15% 0.025 132.1)",
+          "oklch(25% 0.025 132.1)",
+          "oklch(35% 0.025 132.1)",
+          "oklch(45% 0.025 132.1)",
+          "oklch(55% 0.025 132.1)",
+          "oklch(65% 0.025 132.1)",
+          "oklch(75% 0.025 132.1)",
+          "oklch(95% 0.025 132.1)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Large landing and authentication headlines."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Schedule and enrollment page headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Class and enrollment row headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Supporting copy and schedule details."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Bold form labels and compact interface text."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "page-arrive",
+        "value": "420ms cubic-bezier(0.2, 0.8, 0.2, 1)",
+        "purpose": "Brief page entrance."
+      },
+      {
+        "name": "control-transition",
+        "value": "160ms ease-out",
+        "purpose": "Button color and position states."
+      },
+      {
+        "name": "field-transition",
+        "value": "140ms ease-out",
+        "purpose": "Input border color on hover and focus."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "0.01ms",
+        "purpose": "Reduce animation and transition duration when the user prefers reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "tablet",
+        "value": "820px"
+      },
+      {
+        "name": "mobile",
+        "value": "680px"
+      },
+      {
+        "name": "narrow",
+        "value": "410px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Dark Action Button",
+      "kind": "button",
+      "refersTo": "button-dark",
+      "description": "Default ink action for scheduling and navigation.",
+      "html": "<button class=\"ds-button-dark\" type=\"button\">Inscribirme</button>",
+      "css": ".ds-button-dark { display: inline-flex; min-height: 52px; align-items: center; justify-content: center; gap: 9px; padding: 0 21px; border: 1px solid transparent; border-radius: 11px; color: #fffefa; background: var(--ink); font-family: \"DM Sans Variable\", sans-serif; font-weight: 750; line-height: 1.1; text-decoration: none; transition: background-color 160ms ease-out, color 160ms ease-out, border-color 160ms ease-out, transform 160ms ease-out; cursor: pointer; } .ds-button-dark:hover:not(:disabled) { background: #2a4033; transform: translateY(-1px); } .ds-button-dark:active:not(:disabled) { transform: translateY(0); } .ds-button-dark:disabled { cursor: wait; opacity: 0.64; } .ds-button-dark:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }"
+    },
+    {
+      "name": "Lime Action Button",
+      "kind": "button",
+      "refersTo": "button-accent",
+      "description": "High-visibility account form submission.",
+      "html": "<button class=\"ds-button-accent\" type=\"submit\">Entrar</button>",
+      "css": ".ds-button-accent { display: inline-flex; min-height: 52px; align-items: center; justify-content: center; gap: 9px; padding: 0 21px; border: 1px solid transparent; border-radius: 11px; color: var(--accent-ink); background: var(--accent); font-family: \"DM Sans Variable\", sans-serif; font-weight: 750; line-height: 1.1; text-decoration: none; transition: background-color 160ms ease-out, color 160ms ease-out, border-color 160ms ease-out, transform 160ms ease-out; cursor: pointer; } .ds-button-accent:hover:not(:disabled) { background: #c5ed58; transform: translateY(-1px); } .ds-button-accent:active:not(:disabled) { transform: translateY(0); } .ds-button-accent:disabled { cursor: wait; opacity: 0.64; } .ds-button-accent:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }"
+    },
+    {
+      "name": "Quiet Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Outlined secondary action for compact header controls.",
+      "html": "<button class=\"ds-button-quiet\" type=\"button\">Salir</button>",
+      "css": ".ds-button-quiet { display: inline-flex; min-height: 42px; align-items: center; justify-content: center; gap: 9px; padding: 0 16px; border: 1px solid var(--line); border-radius: 9px; color: var(--ink); background: transparent; font-family: \"DM Sans Variable\", sans-serif; font-size: 0.9rem; font-weight: 750; line-height: 1.1; text-decoration: none; transition: background-color 160ms ease-out, color 160ms ease-out, border-color 160ms ease-out, transform 160ms ease-out; cursor: pointer; } .ds-button-quiet:hover:not(:disabled) { background: #e7e9e0; border-color: #aab5a7; transform: translateY(-1px); } .ds-button-quiet:active:not(:disabled) { transform: translateY(0); } .ds-button-quiet:disabled { cursor: wait; opacity: 0.64; } .ds-button-quiet:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input-default",
+      "description": "Labeled email or password field used in account forms.",
+      "html": "<label class=\"ds-field\"><span>Correo electrónico</span><input class=\"ds-input\" type=\"email\" /></label>",
+      "css": ".ds-field { display: grid; gap: 8px; color: var(--ink); font-family: \"DM Sans Variable\", sans-serif; font-size: 0.9rem; font-weight: 700; } .ds-input { width: 100%; min-height: 51px; padding: 0 14px; border: 1px solid #aeb9ae; border-radius: 8px; color: var(--ink); background: var(--surface); caret-color: #385a30; font-family: \"DM Sans Variable\", sans-serif; font-size: 1rem; font-weight: 500; transition: border-color 140ms ease-out; } .ds-input:hover { border-color: #788c7a; } .ds-input:focus-visible { border-color: var(--focus); outline: 3px solid var(--focus); outline-offset: 2px; }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "description": "Wordmark and responsive primary links.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-wordmark\" href=\"#\"><span class=\"ds-mark\">G</span><span>GIMNASIO</span></a><nav class=\"ds-nav\"><a class=\"ds-link\" href=\"#\">Horarios</a><a class=\"ds-button-small\" href=\"#\">Entrar</a><a class=\"ds-link\" href=\"#\">Crear cuenta</a></nav></header>",
+      "css": ".ds-header { display: flex; min-height: 82px; align-items: center; justify-content: space-between; gap: 24px; padding: 0 clamp(24px, 6.3vw, 96px); border-bottom: 1px solid var(--line); font-family: \"DM Sans Variable\", sans-serif; } .ds-wordmark { display: inline-flex; flex-shrink: 0; align-items: center; gap: 11px; color: var(--ink); font-size: 0.88rem; font-weight: 800; letter-spacing: 0.09em; text-decoration: none; } .ds-mark { display: grid; width: 34px; height: 34px; flex-shrink: 0; place-items: center; border-radius: 9px; color: var(--ink); background: var(--accent); font-family: \"Archivo Variable\", sans-serif; font-size: 1.1rem; font-weight: 700; } .ds-nav { display: flex; min-width: 0; align-items: center; justify-content: flex-end; gap: clamp(14px, 2.3vw, 30px); } .ds-link { color: var(--ink); font-size: 0.93rem; font-weight: 650; text-underline-offset: 0.25em; } .ds-link:hover { text-decoration-thickness: 2px; } .ds-button-small { display: inline-flex; min-height: 42px; align-items: center; justify-content: center; padding: 0 16px; border-radius: 9px; color: var(--surface); background: var(--ink); font-size: 0.9rem; font-weight: 750; text-decoration: none; transition: background-color 160ms ease-out, transform 160ms ease-out; } .ds-button-small:hover { background: #2a4033; transform: translateY(-1px); } .ds-button-small:active { transform: translateY(0); } .ds-button-small:focus-visible, .ds-link:focus-visible, .ds-wordmark:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; } @media (max-width: 680px) { .ds-header { flex-wrap: wrap; gap: 12px; padding: 13px 20px; } .ds-nav { flex: 1 1 100%; flex-wrap: wrap; justify-content: flex-start; gap: 11px 15px; } }"
+    },
+    {
+      "name": "Form Panel",
+      "kind": "card",
+      "refersTo": "form-panel",
+      "description": "Bounded warm-white surface for login and registration forms.",
+      "html": "<section class=\"ds-form-panel\"><h2>Entrar</h2><p>Usa tus credenciales del gimnasio.</p></section>",
+      "css": ".ds-form-panel { width: 100%; max-width: 500px; padding: clamp(26px, 4vw, 42px); border: 1px solid var(--line); border-radius: 15px; color: var(--ink); background: var(--surface); font-family: \"DM Sans Variable\", sans-serif; } .ds-form-panel h2 { margin: 0; font-family: \"Archivo Variable\", sans-serif; font-size: clamp(1.8rem, 3vw, 2.25rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; } .ds-form-panel p { margin: 9px 0 0; color: var(--muted); font-size: 0.95rem; line-height: 1.5; }"
+    },
+    {
+      "name": "Schedule Row",
+      "kind": "custom",
+      "description": "Open row for class, schedule details, capacity, and enrollment action.",
+      "html": "<article class=\"ds-schedule-row\"><div class=\"ds-class\"><h2>Clase de fuerza</h2><p>Sesión guiada por el entrenador.</p></div><dl class=\"ds-details\"><div><dt>Horario</dt><dd>Lunes · 08:00</dd></div><div><dt>Entrenador</dt><dd>Entrenador</dd></div><div><dt>Cupo</dt><dd>4 lugares disponibles</dd></div></dl><button class=\"ds-row-action\" type=\"button\">Inscribirme</button></article>",
+      "css": ".ds-schedule-row { display: grid; align-items: center; grid-template-columns: minmax(180px, 1fr) minmax(260px, 1.25fr) auto; gap: 28px; padding: 25px 7px; border-bottom: 1px solid var(--line); color: var(--ink); font-family: \"DM Sans Variable\", sans-serif; } .ds-class h2 { margin: 0; font-family: \"Archivo Variable\", sans-serif; font-size: 1.55rem; font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; } .ds-class p { margin: 9px 0 0; color: var(--muted); font-size: 0.88rem; line-height: 1.45; } .ds-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px 20px; margin: 0; } .ds-details div:last-child { grid-column: 1 / -1; } .ds-details dt { color: var(--muted); font-size: 0.76rem; line-height: 1.3; } .ds-details dd { margin: 4px 0 0; color: var(--ink); font-size: 0.9rem; font-weight: 650; line-height: 1.35; } .ds-row-action { min-width: 132px; min-height: 46px; padding: 0 16px; border: 1px solid transparent; border-radius: 11px; color: var(--surface); background: var(--ink); font-family: \"DM Sans Variable\", sans-serif; font-size: 0.9rem; font-weight: 750; cursor: pointer; transition: background-color 160ms ease-out, transform 160ms ease-out; } .ds-row-action:hover:not(:disabled) { background: #2a4033; transform: translateY(-1px); } .ds-row-action:active:not(:disabled) { transform: translateY(0); } .ds-row-action:disabled { cursor: wait; opacity: 0.64; } .ds-row-action:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; } @media (max-width: 820px) { .ds-schedule-row { grid-template-columns: minmax(160px, 0.8fr) minmax(220px, 1.2fr); gap: 20px 26px; } .ds-row-action { justify-self: start; } } @media (max-width: 680px) { .ds-schedule-row { grid-template-columns: minmax(0, 1fr) auto; gap: 18px 16px; padding: 22px 3px; } .ds-details { grid-column: 1 / -1; grid-row: 2; } .ds-row-action { grid-column: 1 / -1; grid-row: 3; width: 100%; } }"
+    },
+    {
+      "name": "Enrollment Row",
+      "kind": "custom",
+      "description": "Open divider-separated history row with state and registration date.",
+      "html": "<article class=\"ds-enrollment-row\"><div><h2>Clase de fuerza</h2><p>Lunes · 08:00 · Entrenador</p></div><div class=\"ds-enrollment-meta\"><span class=\"ds-enrollment-state\">Confirmada</span><span>Registrada 28/10/2026</span></div></article>",
+      "css": ".ds-enrollment-row { display: flex; align-items: center; justify-content: space-between; gap: 28px; padding: 24px 7px; border-bottom: 1px solid var(--line); color: var(--ink); font-family: \"DM Sans Variable\", sans-serif; } .ds-enrollment-row h2 { margin: 0; font-family: \"Archivo Variable\", sans-serif; font-size: 1.55rem; font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; } .ds-enrollment-row p { margin: 9px 0 0; color: var(--muted); font-size: 0.88rem; line-height: 1.45; } .ds-enrollment-meta { display: grid; justify-items: end; gap: 8px; color: var(--muted); font-size: 0.82rem; text-align: right; font-variant-numeric: tabular-nums; } .ds-enrollment-state { display: inline-flex; min-height: 27px; align-items: center; padding: 0 9px; border: 1px solid #a9c89e; border-radius: 6px; color: #2d5226; background: #edf7e6; font-size: 0.78rem; font-weight: 700; } @media (max-width: 680px) { .ds-enrollment-row { align-items: flex-start; flex-direction: column; gap: 16px; padding: 21px 3px; } .ds-enrollment-meta { justify-items: start; text-align: left; } }"
+    },
+    {
+      "name": "Enrollment Status",
+      "kind": "chip",
+      "refersTo": "enrollment-state",
+      "description": "Compact confirmed or cancelled enrollment state.",
+      "html": "<span class=\"ds-state\">Confirmada</span>",
+      "css": ".ds-state { display: inline-flex; min-height: 27px; align-items: center; padding: 0 9px; border: 1px solid #a9c89e; border-radius: 6px; color: #2d5226; background: #edf7e6; font-family: \"DM Sans Variable\", sans-serif; font-size: 0.78rem; font-weight: 700; } .ds-state.ds-state--cancelled { border-color: #c6c9c1; color: #4e5750; background: #e8eae4; }"
+    },
+    {
+      "name": "Error Message",
+      "kind": "custom",
+      "description": "Inline API or form error with a soft blush surface.",
+      "html": "<p class=\"ds-error\" role=\"alert\">No se pudo completar la inscripción. Inténtalo de nuevo.</p>",
+      "css": ".ds-error { margin: 0; padding: 12px 14px; border: 1px solid #dfaaa5; border-radius: 8px; color: var(--danger); background: var(--danger-bg); font-family: \"DM Sans Variable\", sans-serif; font-size: 0.9rem; line-height: 1.45; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Ritmo en claro",
+    "overview": "“Ritmo en claro” describes the current interface: it gives class times, coaches, capacity, and the next action a plain, quick-to-scan order. A soft paper field and generous page margins keep the experience calm, while dark green ink gives headings and actions a strong anchor.\n\nPráctica 17 extends the familiar account shell from Práctica 16 with open schedule and enrollment rows. Archivo Variable gives the headlines a firm voice; DM Sans Variable carries supporting copy, labels, and fields. The lime mark and action button add a small, high-visibility cue. At narrow widths, navigation gets its own row and class details stack above a full-width action.",
+    "keyCharacteristics": [
+      "Paper-colored pages with a warm white form surface and dark green ink.",
+      "A single sharp lime accent for the wordmark mark, selection, and key form action.",
+      "Large Archivo headlines paired with practical DM Sans interface text.",
+      "Open, divider-separated schedule and enrollment lists with rounded controls.",
+      "Responsive layouts that preserve links, details, and actions on small screens."
+    ],
+    "rules": [
+      {
+        "name": "The Lime Signal Rule",
+        "body": "Keep lime as a brief marker for primary action and brand emphasis; place dark ink on lime instead of white.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two-Font Rule",
+        "body": "Use Archivo Variable for headings and the small brand mark; use DM Sans Variable for body copy, labels, fields, and controls.",
+        "section": "typography"
+      },
+      {
+        "name": "The Open Schedule Rule",
+        "body": "Keep class and enrollment records in open rows with a 1px divider; do not turn each record into a separate card.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use Archivo Variable for headings and the small brand mark, and DM Sans Variable for body copy, labels, fields, and controls.",
+      "Do preserve at least 4.5:1 contrast for body text, as required by the direction contract.",
+      "Do retain the 3px green keyboard focus outline and preserve all links and actions as the layout stacks.",
+      "Do reserve lime for the wordmark mark, selection, and key action, with dark text over the lime.",
+      "Do keep schedule and enrollment details readable in open rows with their bottom dividers."
+    ],
+    "donts": [
+      "Don't place every schedule or enrollment row inside a separate card; the built lists use open rows.",
+      "Don't use white text on the lime action; the implemented contrast pairing is dark accent ink on lime.",
+      "Don't add new visual chrome that competes with the class, time, coach, capacity, and enrollment action."
+    ]
+  }
+}

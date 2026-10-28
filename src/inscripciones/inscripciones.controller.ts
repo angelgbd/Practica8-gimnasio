@@ -26,16 +26,39 @@ export class InscripcionesController {
   constructor(private readonly servicio: InscripcionesService) {}
 
   @Get()
+  @Roles(Rol.entrenador, Rol.admin)
+  @UseGuards(RolesGuard)
   async listar() {
     const lista = await this.servicio.listar();
     return lista.map(aInscripcionDto);
   }
 
+  @Get("mias")
+  async listarMias(@UsuarioActual() usuario: PayloadJwt) {
+    if (usuario.rol !== Rol.miembro || usuario.miembroId === null) {
+      throw new ForbiddenException(
+        "Solo las cuentas vinculadas a un miembro pueden consultar sus inscripciones",
+      );
+    }
+
+    const lista = await this.servicio.listarDeMiembro(usuario.miembroId);
+    return lista.map(aInscripcionDto);
+  }
+
   @Get(":id")
-  async buscar(@Param("id") id: string) {
+  async buscar(
+    @Param("id") id: string,
+    @UsuarioActual() usuario: PayloadJwt,
+  ) {
     const inscripcion = await this.servicio.buscar(Number(id));
     if (!inscripcion) {
       throw new NotFoundException(`No existe la inscripcion ${id}`);
+    }
+    if (
+      usuario.rol === Rol.miembro &&
+      usuario.miembroId !== inscripcion.miembroId
+    ) {
+      throw new ForbiddenException("No puedes consultar la inscripcion de otra persona");
     }
     return aInscripcionDto(inscripcion);
   }
@@ -47,10 +70,15 @@ export class InscripcionesController {
     @UsuarioActual() usuario: PayloadJwt,
     @Res({ passthrough: true }) res: Response,
   ) {
-    if (usuario.rol === Rol.miembro && usuario.miembroId !== dto.miembroId) {
-      throw new ForbiddenException("Solo puedes inscribirte a ti mismo");
+    if (usuario.rol !== Rol.miembro || usuario.miembroId === null) {
+      throw new ForbiddenException(
+        "Solo las cuentas vinculadas a un miembro pueden inscribirse a un horario",
+      );
     }
-    const inscripcion = await this.servicio.crear(dto);
+    const inscripcion = await this.servicio.crear({
+      horarioId: dto.horarioId,
+      miembroId: usuario.miembroId,
+    });
     res.setHeader("Location", `/inscripciones/${inscripcion.id}`);
     return aInscripcionDto(inscripcion);
   }

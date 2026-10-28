@@ -13,7 +13,7 @@ export class HorarioPrismaRepository implements HorarioRepository {
     const horarios = await this.prisma.horario.findMany({
       orderBy: { id: "asc" },
     });
-    return horarios.map((horario) => this.aDominio(horario));
+    return Promise.all(horarios.map((horario) => this.aDominio(horario)));
   }
 
   async buscarPorId(id: number): Promise<Horario | null> {
@@ -48,20 +48,25 @@ export class HorarioPrismaRepository implements HorarioRepository {
     return this.aDominio(horario);
   }
 
-  private aDominio(horario: {
+  private async aDominio(horario: {
     id: number;
     claseId: number;
     dia: string;
     horaInicio: string;
     cupoMaximo: number;
     entrenador: string;
-  }): Horario {
+  }): Promise<Horario> {
+    const confirmadas = await this.prisma.inscripcion.count({
+      where: { horarioId: horario.id, estado: "confirmada" },
+    });
+
     return {
       id: horario.id,
       claseId: horario.claseId,
       dia: horario.dia,
       horaInicio: horario.horaInicio,
       cupoMaximo: horario.cupoMaximo,
+      lugaresDisponibles: Math.max(0, horario.cupoMaximo - confirmadas),
       entrenador: horario.entrenador,
     };
   }

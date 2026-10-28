@@ -28,6 +28,14 @@ export class InscripcionPrismaRepository implements InscripcionRepository {
     return inscripciones.map((inscripcion) => this.aDominio(inscripcion));
   }
 
+  async listarPorMiembro(miembroId: number): Promise<Inscripcion[]> {
+    const inscripciones = await this.prisma.inscripcion.findMany({
+      where: { miembroId },
+      orderBy: { id: "asc" },
+    });
+    return inscripciones.map((inscripcion) => this.aDominio(inscripcion));
+  }
+
   async buscarPorId(id: number): Promise<Inscripcion | null> {
     const inscripcion = await this.prisma.inscripcion.findUnique({
       where: { id },

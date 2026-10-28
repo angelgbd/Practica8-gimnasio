@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import type { Inscripcion } from './dominio/entidades';
+import type { Inscripcion, NuevaInscripcion } from './dominio/entidades';
 import type { InscripcionRepository } from './dominio/inscripcion.repository';
 import {
   CupoLlenoError,
@@ -7,7 +7,6 @@ import {
   InscripcionDuplicadaError,
   MiembroNoEncontradoError,
 } from './dominio/errores';
-import { CrearInscripcionDto } from './dto/crear-inscripcion.dto';
 import { INSCRIPCION_REPOSITORY } from './inscripciones.tokens';
 
 @Injectable()
@@ -21,11 +20,15 @@ export class InscripcionesService {
     return this.repo.listar();
   }
 
+  listarDeMiembro(miembroId: number): Promise<Inscripcion[]> {
+    return this.repo.listarPorMiembro(miembroId);
+  }
+
   buscar(id: number): Promise<Inscripcion | null> {
     return this.repo.buscarPorId(id);
   }
 
-  async crear(dto: CrearInscripcionDto): Promise<Inscripcion> {
+  async crear(dto: NuevaInscripcion): Promise<Inscripcion> {
     const horario = await this.repo.buscarHorario(dto.horarioId);
     if (!horario) {
       throw new HorarioNoEncontradoError(dto.horarioId);
