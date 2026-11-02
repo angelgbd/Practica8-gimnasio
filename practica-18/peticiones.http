@@ -1,0 +1,47 @@
+### Práctica 17 · Rutas protegidas e inscripciones
+### Usa una base con el seeder cargado. Ejecuta loginMiembro y loginEntrenador primero.
+
+@host = http://localhost:3000
+
+### Sin token: debe responder 401
+GET {{host}}/inscripciones/mias
+
+### Iniciar sesión como miembro vinculado
+# @name loginMiembro
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{ "correo": "karla@itson.mx", "password": "gimnasio2026" }
+
+### Mis inscripciones: solo las de Karla
+GET {{host}}/inscripciones/mias
+Authorization: Bearer {{loginMiembro.response.body.$.data.access_token}}
+
+### Iniciar sesión como entrenador
+# @name loginEntrenador
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{ "correo": "ana@itson.mx", "password": "gimnasio2026" }
+
+### El entrenador no puede ver inscripciones propias de un miembro: 403
+GET {{host}}/inscripciones/mias
+Authorization: Bearer {{loginEntrenador.response.body.$.data.access_token}}
+
+### El miembro envía solo el horario; la API deriva miembroId desde el JWT
+### Usa una base desechable: una inscripción repetida o sin cupo responde 409.
+POST {{host}}/inscripciones
+Authorization: Bearer {{loginMiembro.response.body.$.data.access_token}}
+Content-Type: application/json
+
+{ "horarioId": 2 }
+
+### El entrenador no puede inscribirse como miembro: 403
+POST {{host}}/inscripciones
+Authorization: Bearer {{loginEntrenador.response.body.$.data.access_token}}
+Content-Type: application/json
+
+{ "horarioId": 2 }
+
+### Consultar de nuevo el horario para leer los lugares disponibles actualizados
+GET {{host}}/horarios/2
